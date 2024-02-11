@@ -32,7 +32,7 @@
         <a href="#"><span>À propos</span></a>
         <a href="#"><span>Contact</span></a>
         <a href="#"><span>Évènements passés</span></a>
-        <a href="javascript:void(0);" class="icon" onclick="editNav()">
+        <a href="javascript:void(0);" class="icon">
           <i class="fa fa-bars"></i>
         </a>
       </div>
@@ -75,6 +75,9 @@
                   id="first"
                   name="first"
                   minlength="2"
+                  autocomplete="off"
+                  pattern="[A-Za-z \-'.]*"
+                  required
                 >
               </div>
               <div class="formData">
@@ -84,6 +87,9 @@
                   type="text"
                   id="last"
                   name="last"
+                  autocomplete="off"
+                  pattern="[A-Za-z \-'.]*"
+                  required
                 >
               </div>
               <div class="formData">
@@ -93,6 +99,9 @@
                   type="email"
                   id="email"
                   name="email"
+                  autocomplete="off"
+                  pattern="[a-zA-Z0-9_.\-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9.]*"
+                  required
                 >
               </div>
               <div class="formData">
@@ -102,6 +111,8 @@
                   type="date"
                   id="birthdate"
                   name="birthdate"
+                  autocomplete="off"
+                  required
                 >
               </div>
               <div class="formData">
@@ -114,6 +125,7 @@
                   class="text-control"
                   id="quantity"
                   name="quantity"
+                  autocomplete="off"
                   min="0"
                   max="99"
                 >
@@ -128,6 +140,7 @@
                   id="location1"
                   name="location"
                   value="New York"
+                  required
                 >
                 <label class="checkbox-label" for="location1">
                   <span class="checkbox-icon"></span>
