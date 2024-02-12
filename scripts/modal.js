@@ -5,7 +5,7 @@ const formData = document.querySelectorAll(".formData");
 const topNav = document.getElementById("myTopnav");
 const closeButton = document.querySelector('.close');
 const modalContent = document.querySelector('.content');
-const main = document.querySelector('main');
+const main = document.querySelector('.main');
 
 // Open or close the navigation
 topNav.addEventListener('click', editNav);
@@ -24,8 +24,8 @@ modalContent.addEventListener('click', (event) => {
 })
 closeButton.addEventListener('click', closeModal);
 modalbg.addEventListener('click', closeModal)
-modalbg.addEventListener('keydown', (event) => {
-  if(event.code === 'Escape') {
+window.addEventListener('keydown', (event) => {
+  if(event.code === 'Escape' && modalbg.style.display === "block") {
     closeModal();
   }
 })
@@ -43,15 +43,39 @@ const focusableElementsArray = [
   '[tabindex]:not([tabindex="-1"])',
 ];
 
+const focusableElements = Array.from(modalContent.querySelectorAll(focusableElementsArray));
+const firstFocusableElement = focusableElements[0];
+const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+// close Focus In Modal
+function closeFocusInModal(event) {
+  let focusableElement;
+  if(event.code === 'Tab' && modalbg.style.display === "block") {
+    const elementfocus = modalContent.querySelector(':focus')
+    
+    if(elementfocus === lastFocusableElement && !event.shiftKey) {
+      event.preventDefault();
+      focusableElement = firstFocusableElement;
+    } else if (elementfocus === firstFocusableElement && event.shiftKey) {
+      event.preventDefault();
+      focusableElement = lastFocusableElement;
+    }
+  }
+  return focusableElement;
+}
 
 // focus element 
 function focus() {
-  const focusableElements = Array.from(modalContent.querySelectorAll(focusableElementsArray));
-  const firstFocusableElement = focusableElements[0];
-
   setTimeout(() => {
     firstFocusableElement.focus(); 
   },100);
+
+  window.addEventListener('keydown', (event) => {
+    const focusElement = closeFocusInModal(event);
+    if(focusElement) {
+      focusElement.focus();
+    }
+  })
 }
 
 // launch modal form
