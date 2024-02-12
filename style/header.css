@@ -1,13 +1,17 @@
 .topnav {
     overflow: hidden;
     margin: 3.5%;
+    display: flex;
+    justify-content: space-between;
 }
-.header-logo {
-    float: left;
-}
+
 .main-navbar {
-    float: right;
+    right: 3.5%;
+    background-color: #fff;
+    z-index: 2;
+    border-radius: 15px;
 }
+
 .topnav a {
     float: left;
     display: block;
@@ -36,15 +40,14 @@
     display: none;  
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1200px) {
     .topnav a {display: none;}
     .topnav a.icon {
-        float: right;
         display: block;
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1200px) {
     .topnav.responsive {position: relative;}
     .topnav.responsive .icon {
         position: absolute;
@@ -61,10 +64,7 @@
 
 
 @media screen and (max-width: 540px) {
-.topnav a {display: none;}
 .topnav a.icon {
-    float: right;
-    display: block;
     margin-top: -15px;
 }
 } 
