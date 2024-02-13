@@ -18,6 +18,7 @@ function editNav(event) {
     topNav.className += " responsive";
     mainNavbar.style.boxShadow = '0 0 5px #f3f3f3';
     mainNavbar.style.position = 'fixed';
+    mainNavbar.style.zIndex = '2';
   } else {
     closeNav();
   }
