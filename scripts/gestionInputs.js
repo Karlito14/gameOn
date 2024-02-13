@@ -5,38 +5,29 @@ const insults = ['connard', 'salopard', 'abruti'];
 
 
 form.addEventListener('submit', (event) => {
-    event.preventDefault();
+    event.preventDefault(); 
 
     // Boucle pour géré les 2 inputs de type text prénom et nom
     for(let input of inputsText) {
         try {
-            if(input.id === 'first') {
-                verifyInputsText(input, 'prénom');
-                displayError(input, '', 'prenom');
-            } else {
-                verifyInputsText(input, 'nom');
-                displayError(input, '', 'nom');
-            }
+            verifyInputsText(input, input.dataset.name);
+            displayError(input, '');
         } 
         catch(error) {
-            if(input.id === 'first') {
-                displayError(input, error.message, 'prenom');
-            } else {
-                displayError(input, error.message, 'nom');
-            }
+            displayError(input, error.message);
         }
     }
 })
 
 
 // fonction pour afficher l'erreur sous l'input correspondant
-function displayError(input, error, id) {
+function displayError(input, error) {
 
-    let paragrapheError = document.querySelector(`#erreur-${id}`);
+    let paragrapheError = document.querySelector(`#erreur-${input.dataset.name}`);
 
     if(!paragrapheError) {
         paragrapheError = document.createElement('p');
-        paragrapheError.id = `erreur-${id}`;
+        paragrapheError.id = `erreur-${input.dataset.name}`;
     } 
 
     if(error) {
@@ -60,7 +51,7 @@ function verifyInputsText(input, type) {
     } else if(valueInput.length < 2) {
         throw new Error(`Le ${type} doit faire au moins 2 lettres`);
     } else if (insults.includes(valueInput)) {
-        throw new Error(`Le ${type} ne peut contenir d'injures ! ${valueInput[0] + valueInput.slice(1)} !`);
+        throw new Error(`Le ${type} ne peut contenir d'injures ! ${valueInput[0].toUpperCase() + valueInput.slice(1)} !`);
     } else if(!regexName.test(valueInput)) {
         throw new Error(`Le ${type} ne peut contenir de caractères sépciales`);
     }
