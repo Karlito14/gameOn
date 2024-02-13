@@ -69,7 +69,7 @@
             name="reserve"
             action="index.html"
             method="get"
-            onsubmit="return validate();"
+            novalidate
           >
             <div class="formData">
               <label for="first">Prénom</label><br>
@@ -80,8 +80,7 @@
                 name="first"
                 minlength="2"
                 autocomplete="off"
-                pattern="[A-Za-z \-']*"
-                title="veuillez indique un prénom"
+                title="veuillez indiquer un prénom"
                 required
               >
             </div>
@@ -94,7 +93,7 @@
                 name="last"
                 minlength="2"
                 autocomplete="off"
-                pattern="[A-Za-z \-']*"
+                title="veuillez indiquer un nom"
                 required
               >
             </div>
@@ -106,7 +105,8 @@
                 id="email"
                 name="email"
                 autocomplete="off"
-                pattern="[a-zA-Z0-9_.\-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9.]*"
+                title="veuillez indiquer un email"
+                pattern="[a-zA0-9_.\-]+@[a-zA-Z0-9]+\.[a-z0-9.]+"
                 required
               >
             </div>

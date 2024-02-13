@@ -1,37 +1,67 @@
 const inputsText = document.querySelectorAll('input[type=text]');
+const inputEmail = document.querySelector('input[type=email]');
+const form = document.querySelector('form[name="reserve"]');
+const insults = ['connard', 'salopard', 'abruti'];
 
-const injures = ['connard', 'salopard', 'abruti'];
 
-for (let input of inputsText) {
-    input.addEventListener("input", () => {
-        if(injures.includes(input.value)) {
-            input.setCustomValidity("invalide");
-        } else {
-            input.setCustomValidity("");
-            input.checkValidity();
-        }  
-    });
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
 
-    input.addEventListener("invalid", () => {
-        if(input.id === 'first') {
-            personalisedMessage(input, 'prénom');
-        } else {
-            personalisedMessage(input, 'nom');
+    // Boucle pour géré les 2 inputs de type text prénom et nom
+    for(let input of inputsText) {
+        try {
+            if(input.id === 'first') {
+                verifyInputsText(input, 'prénom');
+                displayError(input, '', 'prenom');
+            } else {
+                verifyInputsText(input, 'nom');
+                displayError(input, '', 'nom');
+            }
+        } 
+        catch(error) {
+            if(input.id === 'first') {
+                displayError(input, error.message, 'prenom');
+            } else {
+                displayError(input, error.message, 'nom');
+            }
         }
-    });
+    }
+})
+
+
+// fonction pour afficher l'erreur sous l'input correspondant
+function displayError(input, error, id) {
+
+    let paragrapheError = document.querySelector(`#erreur-${id}`);
+
+    if(!paragrapheError) {
+        paragrapheError = document.createElement('p');
+        paragrapheError.id = `erreur-${id}`;
+    } 
+
+    if(error) {
+        paragrapheError.innerText = error;
+        paragrapheError.classList.add('message-erreur');
+        input.after(paragrapheError);
+    } else {
+        paragrapheError.remove();
+    }
+    
 }
 
-// fonction pour personnaliser le message selon l'erreur
-function personalisedMessage (input, type) {
-    const valeurInput = input.value.trim();
-    
-    if(valeurInput === "") {
-        input.setCustomValidity(`Veuillez saisir un ${type} d'utilisateur non vide !`);
-    } else if(valeurInput.length < 2) {
-        input.setCustomValidity(`Le ${type} doit faire 2 lettres minimum`);
-    } else if (injures.includes(valeurInput)) {
-        input.setCustomValidity(`Un ${type} d'utilisateur ne peut contenir d'injures ! ${valeurInput[0].toUpperCase() + valeurInput.slice(1)} !`);
-    } else {
-        input.setCustomValidity(`Un ${type} d'utilisateur ne peut contenir que des lettres en minuscules ou majuscules et des tirets. Essayez à nouveau.`);
+
+// fonction qui gère la validité du nom et prénom
+function verifyInputsText(input, type) {
+    const regexName = new RegExp("^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$");
+    const valueInput = input.value;
+
+    if(valueInput === "") {
+        throw new Error(`Le champ ${type} ne peut etre vide`);
+    } else if(valueInput.length < 2) {
+        throw new Error(`Le ${type} doit faire au moins 2 lettres`);
+    } else if (insults.includes(valueInput)) {
+        throw new Error(`Le ${type} ne peut contenir d'injures ! ${valueInput[0] + valueInput.slice(1)} !`);
+    } else if(!regexName.test(valueInput)) {
+        throw new Error(`Le ${type} ne peut contenir de caractères sépciales`);
     }
 }
