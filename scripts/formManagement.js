@@ -9,17 +9,19 @@ const inputQuantity = elForm.querySelector('#quantity');
 const inputsRadio = elForm.querySelectorAll('input[type=radio]');
 const parentInputsRadio = inputsRadio[0].closest('div');
 const conditionsInput = elForm.querySelector('input[type=checkbox][required');
-const parentInputConditions = conditionsInput.closest('div');
-
+const parentInputConditions = conditionsInput.closest('div')
 
 elForm.addEventListener('submit', (event) => {
     event.preventDefault(); 
+
+    let completedForm = true;
 
     try {
         form.checkTextInput(inputFirst);
         form.displayError(inputFirst, '');
     } catch(error) {
         form.displayError(inputFirst, error.message);
+        completedForm = false;
     }
 
     try {
@@ -27,6 +29,7 @@ elForm.addEventListener('submit', (event) => {
         form.displayError(inputLast, '');
     } catch (error) {
         form.displayError(inputLast, error.message);
+        completedForm = false;
     }
 
     try {
@@ -34,6 +37,7 @@ elForm.addEventListener('submit', (event) => {
         form.displayError(inputEmail, '');
     } catch (error) {
         form.displayError(inputEmail, error.message);
+        completedForm = false;
     }
 
     try {
@@ -41,6 +45,7 @@ elForm.addEventListener('submit', (event) => {
         form.displayError(inputBirthDate, '');
     } catch (error) {
         form.displayError(inputBirthDate, error.message);
+        completedForm = false;
     }
 
     try {
@@ -48,6 +53,7 @@ elForm.addEventListener('submit', (event) => {
         form.displayError(inputQuantity, '');
     } catch (error) {
         form.displayError(inputQuantity, error.message);
+        completedForm = false;
     }
 
     try {
@@ -55,6 +61,7 @@ elForm.addEventListener('submit', (event) => {
         form.displayError(parentInputsRadio, '');
     } catch (error) {
         form.displayError(parentInputsRadio, error.message);
+        completedForm = false;
     }
 
     try {
@@ -62,5 +69,11 @@ elForm.addEventListener('submit', (event) => {
         form.displayError(parentInputConditions, '');
     } catch (error) {
         form.displayError(parentInputConditions, error.message);
+        completedForm = false;
     }
+
+    if(completedForm) {
+        form.completedForm(elForm);
+    }
+
 })

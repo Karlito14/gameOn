@@ -4,7 +4,7 @@ import { modal } from './classes/modal.js';
 const modalbg = document.querySelector("#modal");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const modalContent = document.querySelector('#content');
-const closeButton = document.querySelector('#close');
+const closeSpan = document.querySelector('#close');
 const main = document.querySelector('#main');
 
 // close modal event
@@ -12,7 +12,7 @@ modalContent.addEventListener('click', (event) => {
   event.stopPropagation();
 })
 
-closeButton.addEventListener('click', () => {
+closeSpan.addEventListener('click', () => {
   modal.closeModal(modalbg, main);
 });
 
@@ -30,3 +30,10 @@ window.addEventListener('keydown', (event) => {
 modalBtn.forEach((btn) => btn.addEventListener("click", () => {
   modal.launchModal(modalbg, main, modalContent);
 }));
+
+// focus in modal
+window.addEventListener('keydown', (event) => {
+  if(event.code === 'Tab' && modalbg.style.display === 'block') {
+    modal.closeFocusInModal(event);
+  }
+})

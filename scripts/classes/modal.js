@@ -15,7 +15,7 @@ const lastFocusableElement = focusableElements[focusableElements.length - 1];
 export class modal { 
 
     static launchModal(modal, main) {
-        this.focusModal();
+        this.focusInFirstFocusableElement();
 
         modal.style.display = "block";
         modal.removeAttribute('aria-hidden');
@@ -28,28 +28,18 @@ export class modal {
         main.removeAttribute('aria-hidden');
     }
 
-    static focusModal() {
+    static focusInFirstFocusableElement() {
 
         setTimeout(() => {
             firstFocusableElement.focus(); 
         },100);
-
-        window.addEventListener('keydown', (event) => {
-
-            const elementfocus = modalContent.querySelector(':focus');
-    
-            if((elementfocus === firstFocusableElement || elementfocus === lastFocusableElement) && event.code === 'Tab') {
-                const focusElement = this.closeFocusInModal(event, elementfocus);
-                if(focusElement) {
-                    focusElement.focus();
-                }
-            }
-        })
     }
 
-    static closeFocusInModal(event, elementfocus) {
+    static closeFocusInModal(event) {
 
         let focusableElement;
+
+        const elementfocus = modalContent.querySelector(':focus');
 
         if(elementfocus === lastFocusableElement && !event.shiftKey) {
             event.preventDefault();
@@ -59,6 +49,8 @@ export class modal {
             focusableElement = lastFocusableElement;
         }
 
-        return focusableElement;
+        if(focusableElement) {
+            focusableElement.focus();
+        }
     }
 }

@@ -59,11 +59,3 @@
         text-align: left;
     }
 }
-
-
-
-@media screen and (max-width: 540px) {
-.topnav a.icon {
-    margin-top: -15px;
-}
-} 

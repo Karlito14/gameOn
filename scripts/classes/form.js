@@ -1,3 +1,8 @@
+import { modal } from './modal.js';
+
+const main = document.querySelector('#main');
+const modalbg = document.querySelector("#modal");
+
 export class form {
 
     static displayError(input, error) {
@@ -39,10 +44,16 @@ export class form {
         const valueInput = input.value;
         const arrayDate = valueInput.split('-');
         const yearDate = +arrayDate[0];
+
+        const today = new Date();
+        const year = today.getFullYear();
+
         if(valueInput === "") {
             throw new Error(`Renseignez une ${input.dataset.name} de naissance`);
         } else if(yearDate < 1950) {
             throw new Error(`Vous ne pouvez pas etre si vieux !`);
+        } else if(yearDate > year - 18) {
+            throw new Error(`Il faut etre majeur pour participer`);
         }
     }
 
@@ -83,5 +94,25 @@ export class form {
         if(!input.checked) {
             throw new Error("Vous devez accepter nos conditions d'utilisation");
         }
+    }
+
+    static completedForm(form) {
+        const elParent = form.closest('div');
+        form.remove();
+
+        const block = `
+            <div class='block-validation'>
+                <p class='text-validation'>Merci de votre inscription</p>
+                <button class="btn-submit button button-close">Fermer</button>
+            </div>
+        `;
+
+        elParent.innerHTML = block;
+
+        const buttonClose = elParent.querySelector('.button-close');
+
+        buttonClose.addEventListener('click', () => {
+            modal.closeModal(modalbg, main);
+        })
     }
 }

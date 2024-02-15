@@ -8,6 +8,7 @@ const topNav = document.getElementById("myTopnav");
 iconNavbar.addEventListener('click', editNav);
 
 function editNav(event) {
+  event.preventDefault();
   event.stopPropagation();
   if (topNav.className === "topnav") {
     navbar.openNavbar(topNav, mainNavbar);

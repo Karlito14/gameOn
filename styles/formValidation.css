@@ -1,0 +1,13 @@
+.block-validation {
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 50%;
+}
+
+.text-validation {
+    font-size: 36px;
+    text-align: center;
+}
