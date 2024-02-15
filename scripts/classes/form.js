@@ -1,4 +1,5 @@
 import { modal } from './modal.js';
+import { API_KEY } from '../../config/config.js';
 
 const main = document.querySelector('#main');
 const modalbg = document.querySelector("#modal");
@@ -85,7 +86,7 @@ export class form {
             }
         }
 
-        if(checked === false) {
+        if(!checked) {
             throw new Error('Veuillez choisir une ville');
         }
     }
@@ -114,5 +115,40 @@ export class form {
         buttonClose.addEventListener('click', () => {
             modal.closeModal(modalbg, main);
         })
+    }
+
+    static sendForm(form) {
+        const objet = {};
+
+        form.forEach((value, key) => {
+            objet[key] = value;
+        })
+
+        const apiKey = API_KEY;
+        const apiUrl = 'https://pastebin.com/api/api_post.php';
+
+        const postData = {
+            api_dev_key: apiKey,
+            api_option: 'paste',
+            api_paste_code: JSON.stringify(objet),
+            
+            api_paste_name: 'Formulaire',
+            api_paste_format: 'javascript',
+            api_paste_private: 0,
+          };
+
+          const requestOptions = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams(postData)
+          };
+          
+          // Effectuer la requête Fetch
+          fetch(apiUrl, requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.error('Erreur :', error));
     }
 }

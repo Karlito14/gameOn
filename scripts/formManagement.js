@@ -1,6 +1,6 @@
 import { form } from "./classes/form.js";
 
-const elForm = document.querySelector('form[name="reserve"]');
+const elForm = document.querySelector('#formulaire');
 const inputFirst = elForm.querySelector('#first');
 const inputLast = elForm.querySelector('#last');
 const inputEmail = elForm.querySelector('input[type=email]');
@@ -9,10 +9,11 @@ const inputQuantity = elForm.querySelector('#quantity');
 const inputsRadio = elForm.querySelectorAll('input[type=radio]');
 const parentInputsRadio = inputsRadio[0].closest('div');
 const conditionsInput = elForm.querySelector('input[type=checkbox][required');
-const parentInputConditions = conditionsInput.closest('div')
+const parentInputConditions = conditionsInput.closest('div');
 
-elForm.addEventListener('submit', (event) => {
-    event.preventDefault(); 
+
+elForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
 
     let completedForm = true;
 
@@ -72,8 +73,11 @@ elForm.addEventListener('submit', (event) => {
         completedForm = false;
     }
 
+    const formData = new FormData(elForm);
+
     if(completedForm) {
         form.completedForm(elForm);
-    }
 
+        form.sendForm(formData);
+    }
 })
