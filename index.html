@@ -109,7 +109,6 @@
                 data-name="email"
                 autocomplete="off"
                 title="veuillez indiquer un email"
-                pattern="[a-zA0-9_.\-]+@[a-zA-Z0-9]+\.[a-z0-9.]+"
                 required
               >
             </div>
@@ -140,10 +139,10 @@
                 max="99"
               >
             </div>
-            <p class="text-label">
-              A quel tournoi souhaitez-vous participer cette année ?
-            </p>
-            <div class="formData">
+            <div class="formData" data-name="tournoi">
+              <p class="text-label">
+                A quel tournoi souhaitez-vous participer cette année ?
+              </p>
               <input
                 class="checkbox-input"
                 type="radio"
@@ -213,7 +212,7 @@
               >
             </div>
 
-            <div class="formData">
+            <div class="formData" data-name="conditions">
               <input
                 class="checkbox-input"
                 type="checkbox"
@@ -246,7 +245,8 @@
       <p class="copyrights">Copyright 2014 - 2022, GameOn Inc.</p>
     </footer>
     <!-- - - - - - - - -    Script JS   - - - - - - - - -->
-    <script type="module" src="./scripts/modal.js"></script>
-    <script src="./scripts/gestionInputs.js"></script>
+    <script type="module" src="./scripts/modalManagement.js"></script>
+    <script type="module" src="./scripts/navBarManagement.js"></script>
+    <script type="module" src="./scripts/formManagement.js"></script>
   </body>
 </html>
