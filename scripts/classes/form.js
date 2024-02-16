@@ -122,7 +122,7 @@ export class form {
 
         form.forEach((value, key) => {
             objet[key] = value;
-        })
+        });
 
         const apiKey = API_KEY;
         const apiUrl = 'https://pastebin.com/api/api_post.php';
@@ -131,7 +131,6 @@ export class form {
             api_dev_key: apiKey,
             api_option: 'paste',
             api_paste_code: JSON.stringify(objet),
-            
             api_paste_name: 'Formulaire',
             api_paste_format: 'javascript',
             api_paste_private: 0,
@@ -139,9 +138,6 @@ export class form {
 
           const requestOptions = {
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
             body: new URLSearchParams(postData)
           };
           
