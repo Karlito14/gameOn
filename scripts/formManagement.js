@@ -10,6 +10,7 @@ const inputsRadio = elForm.querySelectorAll('input[type=radio]');
 const parentInputsRadio = inputsRadio[0].closest('div');
 const conditionsInput = elForm.querySelector('input[type=checkbox][required');
 const parentInputConditions = conditionsInput.closest('div');
+const arrayInputs = [inputFirst, inputLast, inputEmail, inputBirthDate, inputQuantity, inputsRadio, conditionsInput];
 
 
 elForm.addEventListener('submit', async (event) => {

@@ -138,10 +138,14 @@ input {
 }
 
 .message-erreur {
-    color: #e54858;
     font-size: 0.8em;
+    color: #e54858;
+    display: block;
+    margin-bottom: 7px;
+    transition: 0.3s;
 }
 
+/* demander au mentor*/
 .formData[data-error]::after {
     content: attr(data-error);
     font-size: 0.4em;
@@ -167,7 +171,9 @@ input[data-error]::after {
     content: attr(data-error);
     font-size: 0.4em;
     color: red;
-} 
+}
+/* fin demander au mentor*/
+
 .checkbox-label,
 .checkbox2-label {
     position: relative;
@@ -269,6 +275,8 @@ input[data-error]::after {
     cursor: pointer;
     border: 0;
 }
+
+/* demander au mentor*/
 /* custom select styles */
 .custom-select {
     position: relative;
@@ -335,6 +343,7 @@ input[data-error]::after {
 .same-as-selected {
     background-color: rgba(0, 0, 0, 0.1);
 }
+/* fin demander au mentor*/
 /* custom select end */
 .text-label {
     font-weight: normal;
