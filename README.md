@@ -28,7 +28,7 @@ GameOn est une plateforme qui permet aux utilisateurs de s'inscrire afin de part
 
 ### Optionnel
 * coder en JavaScrip orienté objet
-* Envoyer le formulaire vers [pastebin](https://pastebin.com/). Si vous souhaitez tester le code il faut s'inscrire sur pastebin et remplacer API_KEY par votre clé API dans le fichier form.js ligne 127 
+* Envoyer le formulaire vers [pastebin](https://pastebin.com/)
 
 Réalisé par [Carlos Leiroz](https://www.linkedin.com/in/carlos-leiroz/)
 
