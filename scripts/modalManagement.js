@@ -1,4 +1,4 @@
-import { modal } from './classes/modal.js';
+import { Modal } from './classes/modal.js';
 
 // DOM Elements
 const modalbg = document.querySelector("#modal");
@@ -7,11 +7,13 @@ const modalContent = document.querySelector('#content');
 const closeSpan = document.querySelector('#close');
 const main = document.querySelector('#main');
 
-// close modal event
+export const modal = new Modal(modalbg, main, modalContent);
+
 modalContent.addEventListener('click', (event) => {
   event.stopPropagation();
 })
 
+// Close modal
 closeSpan.addEventListener('click', () => {
   modal.closeModal(modalbg, main);
 });

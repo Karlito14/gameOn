@@ -1,4 +1,4 @@
-import { navbar } from './classes/navbar.js';
+import { Navbar } from './classes/navbar.js';
 
 const iconNavbar = document.querySelector('#icon');
 const mainNavbar = document.querySelector('#main-navbar');
@@ -11,15 +11,18 @@ function editNav(event) {
   event.preventDefault();
   event.stopPropagation();
   if (topNav.className === "topnav") {
-    navbar.openNavbar(topNav, mainNavbar);
+    Navbar.openNavbar(topNav, mainNavbar);
   } else {
-    navbar.closeNavbar(topNav, mainNavbar);
+    Navbar.closeNavbar(topNav, mainNavbar);
   }
 }
 
+// close navbar by scroll
 window.addEventListener('scroll', () => {
-  navbar.closeNavbar(topNav, mainNavbar);
+  Navbar.closeNavbar(topNav, mainNavbar);
 });
+
+// close the navbar by click outside 
 window.addEventListener('click', () => {
-  navbar.closeNavbar(topNav, mainNavbar);
+  Navbar.closeNavbar(topNav, mainNavbar);
 });

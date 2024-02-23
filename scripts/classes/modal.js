@@ -7,50 +7,62 @@ const focusableElementsArray = [
     '[tabindex]:not([tabindex="-1"])',
 ];
 
-const modalContent = document.querySelector('#content');
-const focusableElements = Array.from(modalContent.querySelectorAll(focusableElementsArray));
-const firstFocusableElement = focusableElements[0];
-const lastFocusableElement = focusableElements[focusableElements.length - 1];
+export class Modal { 
 
-export class modal { 
+    constructor(modal, main, modalContent) {
+        this.modal = modal
+        this.main = main
+        this.modalContent = modalContent
+        this.firstFocusableElement = this.findFirstFocusableElement(focusableElementsArray)
+        this.lastFocusableElement = this.findLastFocusableElement(focusableElementsArray)
+    }
 
-    static launchModal(modal, main) {
+    launchModal() {
         this.focusInFirstFocusableElement();
 
-        modal.style.display = "block";
-        modal.removeAttribute('aria-hidden');
-        main.setAttribute('aria-hidden', true);
+        this.modal.style.display = "block";
+        this.modal.removeAttribute('aria-hidden');
+        this.main.setAttribute('aria-hidden', true);
     }
 
-    static closeModal(modal, main) {
-        modal.style.display = "none";
-        modal.setAttribute('aria-hidden', true);
-        main.removeAttribute('aria-hidden');
+    closeModal() {
+        this.modal.style.display = "none";
+        this.modal.setAttribute('aria-hidden', true);
+        this.main.removeAttribute('aria-hidden');
     }
 
-    static focusInFirstFocusableElement() {
-
+    focusInFirstFocusableElement() {
         setTimeout(() => {
-            firstFocusableElement.focus(); 
+            this.firstFocusableElement.focus(); 
         },100);
     }
 
-    static closeFocusInModal(event) {
+    closeFocusInModal(event) {
 
         let focusableElement;
 
-        const elementfocus = modalContent.querySelector(':focus');
+        const elementfocus = this.modalContent.querySelector(':focus');
 
-        if(elementfocus === lastFocusableElement && !event.shiftKey) {
+        if(elementfocus === this.lastFocusableElement && !event.shiftKey) {
             event.preventDefault();
-            focusableElement = firstFocusableElement;
-        } else if (elementfocus === firstFocusableElement && event.shiftKey) {
+            focusableElement = this.firstFocusableElement;
+        } else if (elementfocus === this.firstFocusableElement && event.shiftKey) {
             event.preventDefault();
-            focusableElement = lastFocusableElement;
+            focusableElement = this.lastFocusableElement;
         }
 
         if(focusableElement) {
             focusableElement.focus();
         }
+    }
+
+    findFirstFocusableElement(arrayFocusableElements) {
+        const focusableElements = Array.from(this.modalContent.querySelectorAll(arrayFocusableElements));
+        return focusableElements[0];
+    }
+
+    findLastFocusableElement(arrayFocusableElements) {
+        const focusableElements = Array.from(this.modalContent.querySelectorAll(arrayFocusableElements));
+        return focusableElements[focusableElements.length - 1];
     }
 }

@@ -1,4 +1,4 @@
-import { form } from "./classes/form.js";
+import { Form } from "./classes/Form.js";
 
 const elForm = document.querySelector('#formulaire');
 const inputFirst = elForm.querySelector('#first');
@@ -10,8 +10,6 @@ const inputsRadio = elForm.querySelectorAll('input[type=radio]');
 const parentInputsRadio = inputsRadio[0].closest('div');
 const conditionsInput = elForm.querySelector('input[type=checkbox][required');
 const parentInputConditions = conditionsInput.closest('div');
-const arrayInputs = [inputFirst, inputLast, inputEmail, inputBirthDate, inputQuantity, inputsRadio, conditionsInput];
-
 
 elForm.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -19,66 +17,66 @@ elForm.addEventListener('submit', async (event) => {
     let completedForm = true;
 
     try {
-        form.checkTextInput(inputFirst);
-        form.displayError(inputFirst, '');
+        Form.checkTextInput(inputFirst);
+        Form.displayError(inputFirst, '');
     } catch(error) {
-        form.displayError(inputFirst, error.message);
+        Form.displayError(inputFirst, error.message);
         completedForm = false;
     }
 
     try {
-        form.checkTextInput(inputLast);
-        form.displayError(inputLast, '');
+        Form.checkTextInput(inputLast);
+        Form.displayError(inputLast, '');
     } catch (error) {
-        form.displayError(inputLast, error.message);
+        Form.displayError(inputLast, error.message);
         completedForm = false;
     }
 
     try {
-        form.checkEmailInput(inputEmail);
-        form.displayError(inputEmail, '');
+        Form.checkEmailInput(inputEmail);
+        Form.displayError(inputEmail, '');
     } catch (error) {
-        form.displayError(inputEmail, error.message);
+        Form.displayError(inputEmail, error.message);
         completedForm = false;
     }
 
     try {
-        form.checkBirthdateInput(inputBirthDate);
-        form.displayError(inputBirthDate, '');
+        Form.checkBirthdateInput(inputBirthDate);
+        Form.displayError(inputBirthDate, '');
     } catch (error) {
-        form.displayError(inputBirthDate, error.message);
+        Form.displayError(inputBirthDate, error.message);
         completedForm = false;
     }
 
     try {
-        form.checkQuantityInput(inputQuantity);
-        form.displayError(inputQuantity, '');
+        Form.checkQuantityInput(inputQuantity);
+        Form.displayError(inputQuantity, '');
     } catch (error) {
-        form.displayError(inputQuantity, error.message);
+        Form.displayError(inputQuantity, error.message);
         completedForm = false;
     }
 
     try {
-        form.checkRadioInputs(inputsRadio);
-        form.displayError(parentInputsRadio, '');
+        Form.checkRadioInputs(inputsRadio);
+        Form.displayError(parentInputsRadio, '');
     } catch (error) {
-        form.displayError(parentInputsRadio, error.message);
+        Form.displayError(parentInputsRadio, error.message);
         completedForm = false;
     }
 
     try {
-        form.checkCheckboxRequired(conditionsInput);
-        form.displayError(parentInputConditions, '');
+        Form.checkCheckboxRequired(conditionsInput);
+        Form.displayError(parentInputConditions, '');
     } catch (error) {
-        form.displayError(parentInputConditions, error.message);
+        Form.displayError(parentInputConditions, error.message);
         completedForm = false;
     }
 
     const formData = new FormData(elForm);
 
     if(completedForm) {
-        form.completedForm(elForm);
+        Form.completedForm(elForm);
 
-        form.sendForm(formData);
+        Form.sendForm(formData);
     }
 })

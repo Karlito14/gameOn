@@ -1,10 +1,7 @@
-import { modal } from './modal.js';
 import { API_KEY } from '../../config/config.js';
+import { modal } from '../modalManagement.js';
 
-const main = document.querySelector('#main');
-const modalbg = document.querySelector("#modal");
-
-export class form {
+export class Form {
 
     static displayError(input, error) {
 
@@ -28,7 +25,7 @@ export class form {
         const regexName = new RegExp("^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$");
         const valueInput = input.value;
 
-        const insults = ['connard', 'salopard', 'abruti'];
+        const insults = ['idiot', 'salopard', 'abruti'];
 
         if(valueInput === "") {
             throw new Error(`Le champ ${input.dataset.name} ne peut etre vide`);
@@ -38,6 +35,14 @@ export class form {
             throw new Error(`Le ${input.dataset.name} ne peut contenir d'injures !`);
         } else if(!regexName.test(valueInput)) {
             throw new Error(`Le ${input.dataset.name} ne peut contenir de caractères sépciales`);
+        }
+    }
+
+    static checkEmailInput(input) {
+        const regexEmail = new RegExp("[a-zA0-9_.\-]+@[a-zA-Z0-9]+\.[a-z0-9.]+")
+
+        if(!regexEmail.test(input.value)) {
+            throw new Error(`Veuillez renseigner une adresse mail valide`);
         }
     }
 
@@ -55,14 +60,6 @@ export class form {
             throw new Error(`Vous ne pouvez pas etre si vieux !`);
         } else if(yearDate > year - 18) {
             throw new Error(`Il faut etre majeur pour participer`);
-        }
-    }
-
-    static checkEmailInput(input) {
-        const regexEmail = new RegExp("[a-zA0-9_.\-]+@[a-zA-Z0-9]+\.[a-z0-9.]+")
-
-        if(!regexEmail.test(input.value)) {
-            throw new Error(`Veuillez renseigner une adresse mail valide`);
         }
     }
 
@@ -113,15 +110,15 @@ export class form {
         const buttonClose = elParent.querySelector('.button-close');
 
         buttonClose.addEventListener('click', () => {
-            modal.closeModal(modalbg, main);
+            modal.closeModal();
         })
     }
 
-    static sendForm(form) {
-        const objet = {};
+    static async sendForm(formData) {
+        const object = {};
 
-        form.forEach((value, key) => {
-            objet[key] = value;
+        formData.forEach((value, key) => {
+            object[key] = value;
         });
 
         const apiKey = API_KEY;
@@ -130,7 +127,7 @@ export class form {
         const postData = {
             api_dev_key: apiKey,
             api_option: 'paste',
-            api_paste_code: JSON.stringify(objet),
+            api_paste_code: JSON.stringify(object),
             api_paste_name: 'Formulaire',
             api_paste_format: 'javascript',
             api_paste_private: 0,
@@ -141,10 +138,14 @@ export class form {
             body: new URLSearchParams(postData)
           };
           
-          // Effectuer la requête Fetch
-          fetch(apiUrl, requestOptions)
-            .then(response => response.text())
-            .then(result => console.log(result))
-            .catch(error => console.error('Erreur :', error));
+          // fetch request
+          try {
+            const reponse = await fetch(apiUrl, requestOptions);
+            const resultat = await reponse.text();
+            console.log(resultat);
+          } catch (error) {
+            console.error('Erreur :', error);
+          }
+            
     }
 }
