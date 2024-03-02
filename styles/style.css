@@ -8,7 +8,7 @@
     margin: 0;
     padding: 0;
 }
-/* Landing Page */
+/***************** Landing Page *****************/
 
 body {
     margin: 0;
@@ -56,7 +56,7 @@ main {
     background: #1D5B91;
 }
 
-/* Modal form */
+/***************** Modal *****************/
 
 .button {
     background: #ff0000;

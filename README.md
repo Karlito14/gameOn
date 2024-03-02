@@ -27,7 +27,7 @@ GameOn est une plateforme qui permet aux utilisateurs de s'inscrire afin de part
 * Utilisation de frameworks proscrites
 
 ### Optionnel
-* coder en JavaScrip orienté objet
+* Coder en JavaScript orienté objet
 * Envoyer le formulaire vers [pastebin](https://pastebin.com/)
 
 Réalisé par [Carlos Leiroz](https://www.linkedin.com/in/carlos-leiroz/)
