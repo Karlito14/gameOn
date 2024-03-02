@@ -8,6 +8,7 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const main = document.querySelector('#main');
 const body = document.querySelector('body');
 
+// Instance class modal
 export const modal = new Modal(modalbg, main, modalContent, body);
 
 modalContent.addEventListener('click', (event) => {
@@ -16,25 +17,27 @@ modalContent.addEventListener('click', (event) => {
 
 // Close modal
 closeSpan.addEventListener('click', () => {
-  modal.closeModal(modalbg, main);
+  modal.closeModal();
 });
 
 modalbg.addEventListener('click', () => {
-  modal.closeModal(modalbg, main);
+  modal.closeModal();
 })
 
 // close modal or focus in modal
 window.addEventListener('keydown', (event) => {
-  if(event.code === 'Escape' && modalbg.style.display === "block") {
-    modal.closeModal(modalbg, main);
-  }
-
-  if(event.code === 'Tab' && modalbg.style.display === 'block') {
-    modal.closeFocusInModal(event);
+  if(modalbg.style.display === "block") {
+    if(event.code === 'Escape') {
+      modal.closeModal();
+    }
+  
+    if(event.code === 'Tab') {
+      modal.closeFocusInModal(event);
+    }
   }
 })
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", () => {
-  modal.launchModal(modalbg, main, modalContent);
+  modal.launchModal();
 }));
