@@ -21,14 +21,14 @@ export class Modal {
     launchModal() {
         this.focusInFirstFocusableElement();
 
-        this.modal.style.display = "block";
+        this.modal.style.display = 'block';
         this.modal.removeAttribute('aria-hidden');
         this.main.setAttribute('aria-hidden', true);
         this.body.style.overflow = 'hidden';
     }
 
     closeModal() {
-        this.modal.style.display = "none";
+        this.modal.style.display = 'none';
         this.modal.setAttribute('aria-hidden', true);
         this.main.removeAttribute('aria-hidden');
         this.body.removeAttribute('style');

@@ -22,12 +22,12 @@ export class Form {
     }
 
     static checkTextInput(input) {
-        const regexName = new RegExp("^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$");
+        const regexName = new RegExp('^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.\'-]+$');
         const valueInput = input.value;
 
         const insults = ['idiot', 'salopard', 'abruti'];
 
-        if(valueInput === "") {
+        if(valueInput === '') {
             throw new Error(`Le champ ${input.dataset.name} ne peut etre vide`);
         } else if(valueInput.trim().length < 2) {
             throw new Error(`Le ${input.dataset.name} doit faire au moins 2 lettres`);
@@ -39,10 +39,10 @@ export class Form {
     }
 
     static checkEmailInput(input) {
-        const regexEmail = new RegExp("[a-zA0-9_.\-]+@[a-zA-Z0-9]+\.[a-z0-9.]+")
+        const regexEmail = new RegExp('[a-zA0-9_.-]+@[a-zA-Z0-9]+.[a-z0-9.]+');
 
         if(!regexEmail.test(input.value)) {
-            throw new Error(`Veuillez renseigner une adresse mail valide`);
+            throw new Error('Veuillez renseigner une adresse mail valide');
         }
     }
 
@@ -54,12 +54,12 @@ export class Form {
         const today = new Date();
         const year = today.getFullYear();
 
-        if(valueInput === "") {
+        if(valueInput === '') {
             throw new Error(`Renseignez une ${input.dataset.name} de naissance`);
         } else if(yearDate < 1950) {
-            throw new Error(`Vous ne pouvez pas etre si vieux !`);
+            throw new Error('Vous ne pouvez pas etre si vieux !');
         } else if(yearDate > year - 18) {
-            throw new Error(`Il faut etre majeur pour participer`);
+            throw new Error('Il faut etre majeur pour participer');
         }
     }
 
@@ -67,7 +67,7 @@ export class Form {
         const min = +input.min;
         const max = +input.max;
 
-        if(input.value === "") {
+        if(input.value === '') {
             throw new Error('Veuillez renseigner un nombre');
         } else if (+input.value < min || +input.value > max) {
             throw new Error('Veuillez renseigner un nombre entre 0 et 99');
@@ -90,7 +90,7 @@ export class Form {
 
     static checkCheckboxRequired(input) {
         if(!input.checked) {
-            throw new Error("Vous devez accepter nos conditions d'utilisation");
+            throw new Error('Vous devez accepter nos conditions d\'utilisation');
         }
     }
 
@@ -111,7 +111,7 @@ export class Form {
 
         buttonClose.addEventListener('click', () => {
             modal.closeModal();
-        })
+        });
     }
 
     static async sendForm(formData) {
@@ -131,21 +131,20 @@ export class Form {
             api_paste_name: 'Formulaire',
             api_paste_format: 'javascript',
             api_paste_private: 0,
-          };
+        };
 
-          const requestOptions = {
+        const requestOptions = {
             method: 'POST',
             body: new URLSearchParams(postData)
-          };
+        };
           
-          // fetch request
-          try {
+        // fetch request
+        try {
             const reponse = await fetch(apiUrl, requestOptions);
             const resultat = await reponse.text();
             console.log(resultat);
-          } catch (error) {
+        } catch (error) {
             console.error('Erreur :', error);
-          }
-            
+        }      
     }
 }

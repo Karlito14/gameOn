@@ -1,4 +1,4 @@
-import { Form } from "./classes/form.js";
+import { Form } from './classes/form.js';
 
 
 // DOM elements form
@@ -82,4 +82,4 @@ elForm.addEventListener('submit', async (event) => {
 
         Form.sendForm(formData);
     }
-})
+});
